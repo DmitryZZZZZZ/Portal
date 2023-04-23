@@ -1,0 +1,29 @@
+{% extends 'flatpages/default.html' %}
+{% load custom_filters %}
+{% block title %}
+Post
+{% endblock title %}
+{% block content %}
+{% if post %}
+        <table>
+           <tr>
+                <td><b>Заголовок</b></td>
+                <td><b>Дата публикации</b></td>
+                <td><b>Публикация</b></td>
+            </tr>
+
+            <tr>
+                <td>{{ post.title|censor }}</td>
+                <td>{{ post.time_in|date:'d M Y' }}</td>
+                <td>{{ post.text|censor }}</td>
+            </tr>
+        </table>
+                    <td>
+            <a href="{% url 'news_edit' post.id %}"><u>Редактировать</u></a> <!--ссылка на редактирование поста-->
+
+            <a href="{% url 'news_delete' post.id %}"><u> Удалить </u></a> <!-- добавим ссылку на удаление поста-->
+        </td>
+    {% else %}
+        <h2>Новостей нет!</h2>
+    {% endif %}
+{% endblock content %}

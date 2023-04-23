@@ -1,0 +1,45 @@
+{% extends 'flatpages/default.html' %}
+
+{% load custom_filters %}
+
+{% block title %}
+Categories
+{% endblock title %}
+
+{% block content %}
+    {% if is_not_subscriber %}
+        <p class="text-center"><a href="{% url 'subscribe' category.id %}" class="btn btn-secondary btn-sm">Подписаться</a></p>
+    {% endif %}
+    {% if is_subscriber %}
+        <p class="text-center"><a href="{% url 'category_un_sub' category.id %}" class="btn btn-secondary btn-sm">Отписаться</a></p>
+    {% endif %}
+    {% if category_news_list %}
+        <table>
+            <tr>
+                <td><b>Заголовок</b></td>
+                <td><b>Категории</b></td>
+                <td><b>Дата публикации</b></td>
+                <td><b>Публикация</b></td>
+            </tr>
+
+            {% for post in category_news_list %}
+                    <td>
+                        <a href="{% url 'news_edit' post.id %}"><u>Редактировать</u></a> <!--ссылка на редактирование поста-->
+                        <a href="{% url 'news_delete' post.id %}"><u> Удалить </u></a> <!-- добавим ссылку на удаление поста-->
+        </td>
+            <tr>
+                <td>{{ post.title|censor }}</td>
+                <td>
+                    {% for category in post.category.all %}
+                    <a href="{% url 'category_list' category.id %}">{{category}}</a>
+                    {% endfor %}
+                </td>
+                <td>{{ post.time_in|date:'d M Y' }}</td>
+                <td>{{ post.text|truncatewords:20|censor }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <h4>Новостей нет!</h4>
+    {% endif %}
+{% endblock%}

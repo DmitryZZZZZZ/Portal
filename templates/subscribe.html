@@ -1,0 +1,6 @@
+{% extends 'flatpages/default.html' %}
+
+{% block content %}
+    <h2 class="text_center">{{message}} "{{category}}"</h2>
+    <button><a href="{% url 'category_list' category.id %}">Назад</a></button>
+{% endblock%}
