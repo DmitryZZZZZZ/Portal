@@ -59,7 +59,7 @@ class Category(models.Model):
     subscribers = models.ManyToManyField(User, blank=True, related_name='categories')
 
     def __str__(self):
-        return self.themes
+        return self.get_themes_display()
 
 
 class Post(models.Model):
