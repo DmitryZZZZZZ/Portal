@@ -8,11 +8,7 @@ from django.contrib.auth.models import Group
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = [
-            'title',
-            'text',
-            'author',
-        ]
+        fields = ['category', 'author', 'title', 'text']
 
     def clean(self):
         cleaned_data = super().clean()

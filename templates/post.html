@@ -8,12 +8,18 @@ Post
         <table>
            <tr>
                 <td><b>Заголовок</b></td>
+                <td><b>Категория</b></td>
                 <td><b>Дата публикации</b></td>
                 <td><b>Публикация</b></td>
             </tr>
 
             <tr>
                 <td>{{ post.title|censor }}</td>
+                <td>
+                    {% for category in post.category.all %}
+                    <a href="{% url "category_list" category.id %}">{{ category }}</a>
+                    {% endfor %}
+                </td>
                 <td>{{ post.time_in|date:'d M Y' }}</td>
                 <td>{{ post.text|censor }}</td>
             </tr>
