@@ -4,7 +4,7 @@
 Posts
 {% endblock title %}
 {% block content %}
-    <h2>Всего новостей на странице: {{ object_list|length }}</h2>
+    <h3 class="text-center text-dark">Всего новостей на странице: {{ object_list|length }}</h3>
     {% if posts %}
         <table>
             <tr>
@@ -16,8 +16,8 @@ Posts
 
             {% for post in posts %}
                     <td>
-                        <a href="{% url 'news_edit' post.id %}"><u>Редактировать</u></a> <!--ссылка на редактирование поста-->
-                        <a href="{% url 'news_delete' post.id %}"><u> Удалить </u></a> <!-- добавим ссылку на удаление поста-->
+                        <a href="{% url 'news_edit' post.id %}"><u>Редактировать</u></a>
+                        <a href="{% url 'news_delete' post.id %}"><u> Удалить </u></a>
         </td>
             <tr>
                 <td>{{ post.title|censor }}</td>

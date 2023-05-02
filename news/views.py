@@ -1,5 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.http import HttpResponse
 from django.urls import reverse_lazy
+from django.views import View
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
 from .models import Post, Category
 from .filters import PostFilter
@@ -113,6 +115,7 @@ class CategoryListView(PostsList):
         context['category'] = self.category
         return context
 
+
 @login_required
 def subscribe(request, pk):
     user = request.user
@@ -121,3 +124,5 @@ def subscribe(request, pk):
 
     message = 'Вы успешно подписаны на категорию'
     return render(request, 'subscribe.html', {'category': category, 'message': message})
+
+

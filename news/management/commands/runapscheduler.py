@@ -51,13 +51,10 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         scheduler = BlockingScheduler(timezone=settings.TIME_ZONE)
         scheduler.add_jobstore(DjangoJobStore(), "default")
-
-        # добавляем работу нашему задачнику
         scheduler.add_job(
             my_job,
             trigger=CronTrigger(day_of_week="mon", hour="00", minute="00"),
-            # То же, что и интервал, но задача тригера таким образом более понятна django
-            id="my_job",  # уникальный айди
+            id="my_job",
             max_instances=1,
             replace_existing=True,
         )
@@ -68,7 +65,6 @@ class Command(BaseCommand):
             trigger=CronTrigger(
                 day_of_week="mon", hour="00", minute="00"
             ),
-            # Каждую неделю будут удаляться старые задачи, которые либо не удалось выполнить, либо уже выполнять не надо.
             id="delete_old_job_executions",
             max_instances=1,
             replace_existing=True,
