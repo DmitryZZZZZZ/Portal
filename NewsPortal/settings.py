@@ -149,13 +149,14 @@ ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_FORMS = {'signup': 'news.forms.CommonSignupForm'}
 ROOT_URLCONF = 'NewsPortal.urls'
 
-EMAIL_HOST = 'smtp.mail.ru'
-EMAIL_PORT = 2525
-EMAIL_HOST_USER = 'mojoutdz'
-EMAIL_HOST_PASSWORD = 'nKc8Vz2nNEQyrcTMPgMj'
-EMAIL_USE_SSL = False
-EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = 'mojoutdz@mail.ru'
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+EMAIL_USE_SSL = True
+# EMAIL_USE_TLS = True
+
+DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL')
 
 APSCHEDULER_DATETIME_FORMAT = "N j, Y, f:s a"
 APSCHEDULER_RUN_NOW_TIMEOUT = 25
@@ -165,3 +166,6 @@ CELERY_RESULT_BACKEND = 'redis://default:rAaqrP4B5bIkOaGj1dMlVYnUFUSUvIyK@redis-
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
+
+
+# celery -A NewsPortal worker -l INFO -B

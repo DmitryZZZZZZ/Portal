@@ -43,7 +43,7 @@ def weekly_notification():
     last_week = today - datetime.timedelta(days=7)
     posts = Post.objects.filter(time_in__gte=last_week)
     categories = set(posts.values_list('category__themes', flat=True))
-    subscribers = set(Category.objects.filter(themes__in=categories).values_list('subscribers', flat=True))
+    subscribers = set(Category.objects.filter(themes__in=categories).values_list('subscribers__email', flat=True))
 
     html_content = render_to_string(
         'weekly_notifications_email.html',
@@ -61,4 +61,4 @@ def weekly_notification():
     )
     msg.attach_alternative(html_content, "text/html")
 
-    msg.send()
+    msg.send(fail_silently=False)
