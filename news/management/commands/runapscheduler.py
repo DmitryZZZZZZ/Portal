@@ -16,7 +16,6 @@ from news.models import Post, Category
 logger = logging.getLogger(__name__)
 
 
-# наша задача по выводу текста на экран
 def my_job():
     today = datetime.datetime.now()
     last_week = today - datetime.timedelta(days=7)
@@ -39,7 +38,7 @@ def my_job():
     msg.attach_alternative(html_content, 'text/html')
     msg.send()
 
-# функция, которая будет удалять неактуальные задачи
+
 def delete_old_job_executions(max_age=604_800):
     """This job deletes all apscheduler job executions older than `max_age` from the database."""
     DjangoJobExecution.objects.delete_old_job_executions(max_age)
