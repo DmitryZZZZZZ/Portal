@@ -9,7 +9,6 @@
     {{ filterset.form.as_p }}
     <input type="submit" value="Найти" />
 </form>
-    {% if posts %}
         <table>
             <tr>
                 <td><b>Заголовок</b></td>
@@ -23,9 +22,9 @@
                 <td>{{ post.time_in|date:'d M Y' }}</td>
                 <td>{{ post.text|truncatewords:20|censor }}</td>
             </tr>
+            {% empty %}
+                <h2>Новостей нет!</h2>
             {% endfor %}
         </table>
-    {% else %}
-        <h2>Новостей нет!</h2>
     {% endif %}
 {% endblock content %}

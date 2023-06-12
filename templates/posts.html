@@ -5,7 +5,6 @@ Posts
 {% endblock title %}
 {% block content %}
     <h3 class="text-center text">Всего новостей на странице: {{ object_list|length }}</h3>
-{% if posts %}
         <table>
             <tr>
                 <td><b>Заголовок</b></td>
@@ -30,11 +29,10 @@ Posts
                 <td>{{ post.time_in|date:'d M Y' }}</td>
                 <td>{{ post.text|truncatewords:20|censor }}</td>
             </tr>
+                {% empty %}
+        <h2>Новостей нет!</h2>
             {% endfor %}
         </table>
-    {% else %}
-        <h2>Новостей нет!</h2>
-    {% endif %}
 
    {% if page_obj.has_previous %}
        <a href="?page=1">1</a>

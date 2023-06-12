@@ -4,7 +4,6 @@
 Post
 {% endblock title %}
 {% block content %}
-{% if post %}
         <table>
            <tr>
                 <td><b>Заголовок</b></td>
@@ -18,6 +17,8 @@ Post
                 <td>
                     {% for category in post.category.all %}
                     <a href="{% url "category_list" category.id %}">{{ category }}</a>
+                    {% empty %}
+                        <h2>Новостей нет!</h2>
                     {% endfor %}
                 </td>
                 <td>{{ post.time_in|date:'d M Y' }}</td>
@@ -25,11 +26,8 @@ Post
             </tr>
         </table>
                     <td>
-            <a href="{% url 'news_edit' post.id %}"><u>Редактировать</u></a> <!--ссылка на редактирование поста-->
+            <a href="{% url 'news_edit' post.id %}"><u>Редактировать</u></a>
 
-            <a href="{% url 'news_delete' post.id %}"><u> Удалить </u></a> <!-- добавим ссылку на удаление поста-->
+            <a href="{% url 'news_delete' post.id %}"><u> Удалить </u></a>
         </td>
-    {% else %}
-        <h2>Новостей нет!</h2>
-    {% endif %}
 {% endblock content %}

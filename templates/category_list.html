@@ -13,7 +13,6 @@ Categories
     {% if is_subscriber %}
         <p class="text-center"><a href="{% url 'category_un_sub' category.id %}" class="btn btn-secondary btn-sm">Отписаться</a></p>
     {% endif %}
-    {% if category_news_list %}
         <table>
             <tr>
                 <td><b>Заголовок</b></td>
@@ -37,9 +36,9 @@ Categories
                 <td>{{ post.time_in|date:'d M Y' }}</td>
                 <td>{{ post.text|truncatewords:20|censor }}</td>
             </tr>
+            {% empty %}
+                <h2>Новостей нет!</h2>
             {% endfor %}
         </table>
-    {% else %}
-        <h4>Новостей нет!</h4>
     {% endif %}
 {% endblock%}
