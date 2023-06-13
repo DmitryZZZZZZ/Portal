@@ -8,6 +8,7 @@
         <link href="{% static 'css/style.css' %}" rel="stylesheet" />
     </head>
     <body>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     <div class="container d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
       <a href="{% url 'post_list' %}" class="d-flex align-items-center link-body-emphasis text-decoration-none">
         <span class="fs-4">News Portal</span>
@@ -39,7 +40,8 @@
     </div>
     <footer id="footer">
     </footer>
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/js/app.js"></script>
     </body>
 </html>
 

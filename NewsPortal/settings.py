@@ -17,7 +17,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-logger = logging.getLogger("NewsPortal.news")
+logger = logging.getLogger(__name__)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -266,27 +266,27 @@ LOGGING = {
     'loggers': {
         'django': {
             'handlers': ['console', 'console_warning', 'console_error', 'general'],
-            'propagate': False,
+            'propagate': True,
         },
         'django.request': {
             'handlers': ['errors', 'mail'],
-            'propagate': False,
+            'propagate': True,
         },
         'django.server': {
             'handlers': ['errors', 'mail'],
-            'propagate': False,
+            'propagate': True,
         },
         'django.template': {
             'handlers': ['errors'],
-            'propagate': False,
+            'propagate': True,
         },
         'django.db_backends': {
             'handlers': ['errors'],
-            'propagate': False,
+            'propagate': True,
         },
         'django.security': {
             'handlers': ['security'],
-            'propagate': False,
+            'propagate': True,
         },
 
     }

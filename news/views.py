@@ -10,6 +10,9 @@ from django.shortcuts import redirect, get_object_or_404, render
 from django.contrib.auth.models import Group
 from django.contrib.auth.decorators import login_required
 from django.core.cache import cache
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class PostsList(ListView):
@@ -18,6 +21,8 @@ class PostsList(ListView):
     template_name = 'posts.html'
     context_object_name = 'posts'
     paginate_by = 5
+    logging.error('test_debug')
+
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
