@@ -15,3 +15,5 @@ app.conf.beat_schedule = {
 }
 
 app.autodiscover_tasks()
+
+# celery -A NewsPortal worker -l INFO -B
