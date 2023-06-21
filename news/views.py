@@ -11,8 +11,8 @@ from django.contrib.auth.models import Group
 from django.contrib.auth.decorators import login_required
 from django.core.cache import cache
 import logging
-
-logger = logging.getLogger(__name__)
+from django.utils import timezone
+from django.shortcuts import redirect
 
 
 class PostsList(ListView):
@@ -23,10 +23,13 @@ class PostsList(ListView):
     paginate_by = 5
     logging.error('test_debug')
 
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         return context
+
+    def post(self, request):
+        request.session['django_timezone'] = request.POST['timezone']
+        return redirect('post_list')
 
 
 class PostDetail(DetailView):
@@ -137,5 +140,3 @@ def subscribe(request, pk):
 
     message = 'Вы успешно подписаны на категорию'
     return render(request, 'subscribe.html', {'category': category, 'message': message})
-
-

@@ -1,4 +1,6 @@
 {% load static account socialaccount %}
+{% load i18n %}
+{% load tz %}
 <html lang="en">
     <head>
         <meta charset="utf-8" />
@@ -15,9 +17,9 @@
       </a>
 
       <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
-        <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{% url 'post_search' %}">Поиск</a>
-        <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{% url 'news_create' %}">Добавить новость</a>
-        <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{% url 'account_signup' %}">Профиль</a>
+        <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{% url 'post_search' %}">{% trans "Поиск" %}</a>
+        <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{% url 'news_create' %}">{% trans "Добавить новость" %}</a>
+        <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{% url 'account_signup' %}">{% trans "Профиль" %}</a>
           {% if user.is_authenticated %}
 
          <h3>{{ user.username }} <a href="../accounts/logout">Logout</a></h3>
@@ -25,6 +27,35 @@
          <h3><a href="{% provider_login_url "google" %}">Login</a></h3>
          {% endif %}
       </nav>
+                <form action="{% url 'set_language' %}" method="POST"> {% csrf_token %}
+            <input type="hidden" name="next" value="{{ redirect_to }}">
+
+            <select name="language" id="">
+                {% get_available_languages as LANGUAGES %} <!-- получаем языки -->
+                {% get_language_info_list for LANGUAGES as languages %} <!-- Помещаем их в список languages -->
+
+                {% for language in languages %} <!-- Итерируясь по списку, выводим их название на языке пользователя и код -->
+                <option value="{{ language.code }}" {% if language.code == LANGUAGE_CODE %} selected {% endif %} >
+                    {{ language.name_local }} - {{ language.code }}
+                </option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="set">
+        </form>
+                {% get_current_timezone as TIME_ZONE %}
+        <form action="" method="POST">
+            {% csrf_token %}
+            <label for="timezone">Time zone:</label>
+            <select name="timezone">
+                {% for tz in timezones %}
+                <option value="{{ tz }}"{% if tz == TIME_ZONE %} selected{% endif %}>{{ tz }}</option>
+                {% endfor %}
+            </select>
+            <input type="submit" value="OK">
+        </form>
+
+        {{ TIME_ZONE }}
+        {{ current_time|timezone:TIME_ZONE }}
     </div>
     <div class="general-container">
             <div class="container">

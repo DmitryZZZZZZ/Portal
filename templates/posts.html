@@ -1,14 +1,11 @@
 {% extends 'flatpages/default.html' %}
+{% load i18n %}
 {% load custom_filters %}
 {% block title %}
 Posts
 {% endblock title %}
 {% block content %}
     <h3 class="text-center text">Всего новостей на странице: {{ object_list|length }}</h3>
-<div id="app-6">
-  <p>{{ message }}</p>
-  <input v-model="message">
-</div>
         <table>
             <tr>
                 <td><b>Заголовок</b></td>
