@@ -1,6 +1,7 @@
 # Portal - SkillFactory training project 
 ### The essence of the project is to develop a news portal containing the following functionality:
   :arrow_forward: Articles are divided into categories.  
+  :arrow_forward: CRUD.  
   :arrow_forward: User authentication system.  
   :arrow_forward: System for subscribing to favorite categories.  
   :arrow_forward: User can subscribe to categories.  
