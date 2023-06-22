@@ -1,4 +1,4 @@
-# Portal - SkillFactory training project, 
+# Portal - SkillFactory training project 
 ### The essence of the project is to develop a news portal containing the following functionality:
   :arrow_forward: Articles are divided into categories.  
   :arrow_forward: User authentication system.  
