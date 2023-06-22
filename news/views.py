@@ -13,6 +13,7 @@ from django.core.cache import cache
 import logging
 from django.utils import timezone
 from django.shortcuts import redirect
+import pytz
 
 
 class PostsList(ListView):
@@ -25,6 +26,7 @@ class PostsList(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['timezones'] = pytz.common_timezones
         return context
 
     def post(self, request):
