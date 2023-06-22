@@ -18,13 +18,11 @@
       <a href="{% url 'post_list' %}" class="d-flex align-items-center link-body-emphasis text-decoration-none">
         <span class="fs-4">News Portal</span>
       </a>
-
       <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
         <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{% url 'post_search' %}">{% trans "Поиск" %}</a>
         <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{% url 'news_create' %}">{% trans "Добавить новость" %}</a>
         <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{% url 'account_signup' %}">{% trans "Профиль" %}</a>
           {% if user.is_authenticated %}
-
          <h3>{{ user.username }} <a href="../accounts/logout">Logout</a></h3>
          {% else %}
          <h3><a href="{% provider_login_url "google" %}">Login</a></h3>
