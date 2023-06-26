@@ -9,6 +9,6 @@
   :arrow_forward: Logging enabled.  
   :arrow_forward: Partial localization and internationalization of the project.  
   :arrow_forward: Implemented the ability to change the time zone and site theme depending on the time zone.  
-  :arrow_forward: Some pages are cached.
+  :arrow_forward: Some pages are cached.  
   :arrow_forward: Connected REST api endpoint.  
   :arrow_forward: Swagger activated.
