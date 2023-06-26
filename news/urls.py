@@ -1,11 +1,17 @@
-from django.urls import path
-from .views import PostsList, PostDetail, PostSearch, PostCreate, PostUpdate, PostDelete, upgrade_me, CategoryListView, \
-    subscribe, IndexView
+from django.urls import path, include
+from rest_framework import routers
+from .views import *
 from django.views.decorators.cache import cache_page
+
+
+router = routers.DefaultRouter()
+router.register(r'news', NewsViewSet, basename='news'),
+router.register(r'articles', ArticleViewSet, basename='articles')
 
 urlpatterns = [
     path('', (PostsList.as_view()), name='post_list'),
-    path('<int:pk>', cache_page(60*10)(PostDetail.as_view()), name='post_detail'),
+    path('api/', include(router.urls)),
+    path('<int:pk>', cache_page(60 * 10)(PostDetail.as_view()), name='post_detail'),
     path('search/', PostSearch.as_view(), name='post_search'),
     path('create/', PostCreate.as_view(), name='news_create'),
     path('<int:pk>/edit/', PostUpdate.as_view(), name='news_edit'),
@@ -16,7 +22,4 @@ urlpatterns = [
     path('upgrade/', upgrade_me, name='upgrade'),
     path('categories/<int:pk>', CategoryListView.as_view(), name='category_list'),
     path('categories/<int:pk>/subscribe', subscribe, name='subscribe'),
-    path('test/', IndexView.as_view()),
-
 ]
-

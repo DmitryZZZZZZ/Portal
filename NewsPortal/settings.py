@@ -52,13 +52,13 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.flatpages',
     'django_filters',
-
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
-
     'django_apscheduler',
+    'rest_framework',
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [

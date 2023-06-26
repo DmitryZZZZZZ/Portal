@@ -14,6 +14,21 @@ import logging
 from django.utils import timezone
 from django.shortcuts import redirect
 import pytz
+from rest_framework import viewsets
+from rest_framework import permissions
+from .serializers import *
+
+
+class NewsViewSet(viewsets.ModelViewSet):
+    queryset = Post.objects.all().filter(view=news)
+    serializer_class = PostSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+
+class ArticleViewSet(viewsets.ModelViewSet):
+    queryset = Post.objects.all().filter(view=article)
+    serializer_class = PostSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
 class PostsList(ListView):
@@ -26,6 +41,7 @@ class PostsList(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['current_time'] = timezone.now()
         context['timezones'] = pytz.common_timezones
         return context
 
